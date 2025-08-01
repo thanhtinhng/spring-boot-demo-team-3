@@ -1,4 +1,5 @@
-.idea/
+application.properties
+app.log
 .mvn/
 target/
 !.mvn/wrapper/maven-wrapper.jar
