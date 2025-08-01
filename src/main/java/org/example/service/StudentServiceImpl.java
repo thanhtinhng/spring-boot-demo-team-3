@@ -4,7 +4,9 @@ import org.example.models.School;
 import org.example.models.Student;
 import org.example.repository.SchoolRepository;
 import org.example.repository.StudentRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +88,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findByNameContaining(String name) {
         return studentRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    public Optional<Student> findById(Long id) {
+        return studentRepository.findById(id);
+    }
+
+    @Override
+    public List<Student> getUserByUsername(String username) {
+        return studentRepository.findByNameContainingIgnoreCase(username);
     }
 
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/students-subjects")
 public class StudentSubjectController {
 
     private final StudentSubjectService service;
@@ -17,34 +16,36 @@ public class StudentSubjectController {
         this.service = service;
     }
 
-
-    @GetMapping
+    @GetMapping("/api/students-subjects")
     public List<StudentSubject> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/api/students/{id}")
     public List<StudentSubject> getByStudent(@PathVariable("id") Long id) {
         return service.getByStudentId(id);
     }
 
-    @PostMapping
-    public StudentSubject create(@RequestBody StudentSubject studentSubject) {
+    @PostMapping("/api/students/{id}")
+    public StudentSubject create(
+            @RequestBody StudentSubject studentSubject, //body truyền "id": {"subjectId": 2}, "score": 10}
+            @PathVariable("id") Long studentId) {
+        studentSubject.getId().setStudentId(studentId);
         return service.add(studentSubject);
     }
 
-    @PutMapping("/student/{studentId}/subject/{subjectId}")
+    @PutMapping("/api/students/{studentId}/subjects/{subjectId}")
     public StudentSubject update(
             @PathVariable("studentId") Long studentId,
             @PathVariable("subjectId") Long subjectId,
-            @RequestBody StudentSubject updated) {
+            @RequestBody StudentSubject updated) { //body truyền score
         StudentSubjectId id = new StudentSubjectId();
         id.setStudentId(studentId);
         id.setSubjectId(subjectId);
         return service.updateScore(id, updated);
     }
 
-    @DeleteMapping("/{studentId}/{subjectId}")
+    @DeleteMapping("/api/students/{studentId}/subjects/{subjectId}")
     public void delete(@PathVariable("studentId") Long studentId, @PathVariable("subjectId") Long subjectId) {
         service.delete(studentId, subjectId);
     }

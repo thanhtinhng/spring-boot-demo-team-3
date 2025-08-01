@@ -27,4 +27,8 @@ public interface StudentService {
 
     List<Student> findByNameContaining(String name);
 
+    Optional<Student> findById(Long id);
+
+    List<Student> getUserByUsername(String username);
+
 }
