@@ -41,13 +41,13 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("/name/{name}")
-    public Product getProductByName(@PathVariable String name) {
+    @GetMapping("/name")
+    public Product getProductByName(@RequestParam String name) {
         return productService.findByName(name);
     }
 
-    @GetMapping("/price/{price}")
-    public List<Product> getProductsByPrice(@PathVariable Double price) {
-        return productService.findProductsByPriceGreaterThan(price);
+    @GetMapping("/price")
+    public List<Product> getProductsByPrice(@RequestParam Double minPrice) {
+        return productService.findProductsByPriceGreaterThan(minPrice);
     }
 }
