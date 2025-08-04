@@ -1,11 +1,14 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.example.exception.ResourceNotFoundExceptionForGlobalEx;
 import org.example.exception.ResourceNotFoundExceptionForLocalEx;
 import org.example.models.Student;
 import org.example.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,12 +17,30 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/students")
+@Validated
 public class StudentController {
 
     private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
+    }
+
+    @PostMapping
+    public Student create(@RequestBody @Valid Student student) {
+        return studentService.add(student);
+    }
+
+    // @Min + @RequestParam, ConstraintViolationException nếu sai
+    @GetMapping("/age-check")
+    public String checkAge(@RequestParam("age") @Min(value = 18, message = "Tuổi phải ít nhất là 18") int age) {
+        return "Tuổi hợp lệ: " + age;
+    }
+
+    // @Min + @PathVariable
+    @GetMapping("/{id}")
+    public String getUserById(@PathVariable("id") @Min(value = 1, message = "ID phải > 0") long id) {
+        return "User with ID: " + id;
     }
 
     @GetMapping("/local-exception")
@@ -47,8 +68,8 @@ public class StudentController {
         throw new RuntimeException("Lỗi không xác định ở Server...");
     }
 
-    @GetMapping("/{username}")
-    public List<Student> getUserByUsername(@PathVariable("username") String username) {
+    @GetMapping("/test-ResponseStatusException")
+    public List<Student> getUserByUsername(@RequestParam("username") String username) {
         if (username.equals("admin")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bạn không được phép thực hiện yêu cầu này.");
         }
@@ -63,11 +84,6 @@ public class StudentController {
     @GetMapping("/email")
     public Optional<Student> getByEmail(@RequestParam("email") String email) {
         return studentService.getStudentByEmail(email);
-    }
-
-    @PostMapping
-    public Student create(@RequestBody Student student) {
-        return studentService.add(student);
     }
 
     @DeleteMapping("/{id}")

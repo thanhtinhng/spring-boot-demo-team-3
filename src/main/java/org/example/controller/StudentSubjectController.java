@@ -16,17 +16,17 @@ public class StudentSubjectController {
         this.service = service;
     }
 
-    @GetMapping("/api/students-subjects")
+    @GetMapping("/students-subjects")
     public List<StudentSubject> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/api/students/{id}")
+    @GetMapping("/students/{id}")
     public List<StudentSubject> getByStudent(@PathVariable("id") Long id) {
         return service.getByStudentId(id);
     }
 
-    @PostMapping("/api/students/{id}")
+    @PostMapping("/students/{id}")
     public StudentSubject create(
             @RequestBody StudentSubject studentSubject, //body truyền "id": {"subjectId": 2}, "score": 10}
             @PathVariable("id") Long studentId) {
@@ -34,7 +34,7 @@ public class StudentSubjectController {
         return service.add(studentSubject);
     }
 
-    @PutMapping("/api/students/{studentId}/subjects/{subjectId}")
+    @PutMapping("/students/{studentId}/subjects/{subjectId}")
     public StudentSubject update(
             @PathVariable("studentId") Long studentId,
             @PathVariable("subjectId") Long subjectId,
@@ -45,7 +45,7 @@ public class StudentSubjectController {
         return service.updateScore(id, updated);
     }
 
-    @DeleteMapping("/api/students/{studentId}/subjects/{subjectId}")
+    @DeleteMapping("/students/{studentId}/subjects/{subjectId}")
     public void delete(@PathVariable("studentId") Long studentId, @PathVariable("subjectId") Long subjectId) {
         service.delete(studentId, subjectId);
     }

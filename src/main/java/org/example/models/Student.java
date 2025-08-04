@@ -1,10 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -21,6 +18,7 @@ public class Student {
     private String name;
 
     @NotBlank
+    @Email(message = "Email không hợp lệ")
     private String email;
 
     @NotNull
