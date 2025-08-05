@@ -1,7 +1,7 @@
-package org.example.DAO.controller;
+package org.example.controller;
 
-import org.example.DAO.model.Product;
-import org.example.DAO.service.ProductService;
+import org.example.model.Product;
+import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

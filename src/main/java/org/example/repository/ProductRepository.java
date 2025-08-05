@@ -1,6 +1,6 @@
-package org.example.DAO.repository;
+package org.example.repository;
 
-import org.example.DAO.model.Product;
+import org.example.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

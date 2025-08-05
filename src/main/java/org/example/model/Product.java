@@ -1,6 +1,9 @@
-package org.example.DAO.model;
+package org.example.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -10,7 +13,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
+
+//    @NotNull(message = "Giá không được để trống")
+//    @Min(value = 1, message = "Giá phải lớn hơn 0")
     private Double price;
 
     public Product() {}

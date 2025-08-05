@@ -1,6 +1,6 @@
-package org.example.DAO.service;
+package org.example.service;
 
-import org.example.DAO.model.Product;
+import org.example.model.Product;
 
 import java.util.List;
 import java.util.Optional;
