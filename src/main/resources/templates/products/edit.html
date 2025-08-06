@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Product</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/editProduct.css}">
+<head th:replace="~{fragments/layout :: head('Edit Product', '/css/editProduct.css')}">
 </head>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Edit Product</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/editProduct.css}">-->
+<!--</head>-->
 <body>
 
-<div class="container">
-    <h1>Chỉnh sửa sản phẩm</h1>
+    <div class="container">
+        <h1>Chỉnh sửa sản phẩm</h1>
 
-    <form th:action="@{'/web/products/edit/' + ${product.id}}" th:object="${product}" method="post" class="form-container">
-        <div class="form-group">
-            <label for="name">Tên sản phẩm:</label>
-            <input type="text" id="name" th:field="*{name}" required />
-            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-        </div>
+        <form th:action="@{'/web/products/edit/' + ${product.id}}" th:object="${product}" method="post" class="form-container">
+            <div class="form-group">
+                <label for="name">Tên sản phẩm:</label>
+                <input type="text" id="name" th:field="*{name}" required />
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="price">Giá ($):</label>
-            <input type="number" id="price" th:field="*{price}" step="0.01" required />
-            <div class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
-        </div>
+            <div class="form-group">
+                <label for="price">Giá ($):</label>
+                <input type="number" id="price" th:field="*{price}" step="0.01" required />
+                <div class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+            </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn-save">Lưu thay đổi</button>
-            <a th:href="@{/web/products}" class="btn-cancel">Hủy</a>
-        </div>
-    </form>
-</div>
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Lưu thay đổi</button>
+                <a th:href="@{/web/products}" class="btn-cancel">Hủy</a>
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>
