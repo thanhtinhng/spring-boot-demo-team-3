@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title, css)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Trang</title>
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{${css}}">
+</head>
+<body>
+    <div th:fragment="content">
+<!--         Nội dung content các thẻ riêng-->
+    </div>
+
+</body>
+</html>
